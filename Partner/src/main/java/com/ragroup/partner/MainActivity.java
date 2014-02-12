@@ -4,8 +4,10 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
@@ -26,21 +28,20 @@ import com.ragroup.Models.Product;
 import com.ragroup.Models.Promotion;
 import com.ragroup.partner.Core.Library;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
-
 
 
 public class MainActivity extends Activity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+    //todo: Навигация хватется с центра
 
-    /**
-     * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
-     */
     private NavigationDrawerFragment mNavigationDrawerFragment;
 
-    /**
-     * Used to store the last screen title. For use in {@link #restoreActionBar()}.
-     */
     private CharSequence mTitle;
 
     @Override
@@ -51,16 +52,19 @@ public class MainActivity extends Activity
 
         setContentView(R.layout.activity_main);
 
-
+        final Context context = this;
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
-                (DrawerLayout) findViewById(R.id.drawer_layout));
+                drawer
+                );
+
     }
 
     @Override
@@ -69,10 +73,14 @@ public class MainActivity extends Activity
         FragmentManager fragmentManager = getFragmentManager();
         mMenu = R.menu.main;
         //todo: впихиваем по номеру фрагмент
+
+
+
         switch (position){
 
             //todo: достаём нашего юзера
             case 0:{
+                //R.string.navigation_section_account
                 mMenu = R.menu.user;
                 Partner partner = Library.me;
                 fragmentManager.beginTransaction()
@@ -81,35 +89,44 @@ public class MainActivity extends Activity
 
 
             }break;
-
             case 1:{
+                //R.string.navigation_section_pricing
                 ArrayList<Product> list = new ArrayList<Product>(Library.products.values());
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, new ProductsFragment(this,list))
                         .commit();
             }
             break;
-            case 2:{
-                fragmentManager.beginTransaction()
-                        .replace(R.id.container, new CultureFragment(this))
-                        .commit();
-            }
-            break;
+            //R.string.navigation_section_calculator
             case 3:{
-
+                //R.string.navigation_section_marketing
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, new MarketingFragment(this))
                         .commit();
             }break;
             case 4:{
-
+                //R.string.navigation_section_culture
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, new CultureFragment(this))
+                        .commit();
+            }
+            break;
+            case 5:{
+                //R.string.navigation_section_promotions
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, new PromotionsFragment(this))
+                        .commit();
+            }break;
+            case 6:{
+                //R.string.navigation_section_info
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, new MaterialsFragment(this))
                         .commit();
             }break;
 
         }
     }
+
 
 
 
@@ -407,6 +424,7 @@ public class MainActivity extends Activity
         Context context;
         public PromotionsFragment(Context context) {
             this.context = context;
+
         }
 
         @Override
@@ -467,4 +485,122 @@ public class MainActivity extends Activity
 
     }
 
+    public static class MaterialsFragment extends Fragment{
+        private final Context context;
+
+        public MaterialsFragment(Context context){
+
+            this.context = context;
+
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+            View rootView = inflater.inflate(R.layout.fragment_info,container,false);
+
+
+
+            ListView listView = (ListView) rootView.findViewById(R.id.list);
+
+            Info material = new Info(){{
+                id = "1";
+                header = "Тема 1";
+                body = "Подписание контракта";
+            }};
+
+            Info material1 = new Info(){{
+                header = "Тема 2";
+                body = "Чего хочет клиент";
+            }};
+            Info material2 = new Info(){{
+                body = "Пособие по продажам";
+            }};
+            Info material3 = new Info(){{
+                body = "Работа с выражениями";
+            }};
+            Info material4 = new Info(){{
+                header = "Аудио подкаст";
+                body = "Телефонные звонки";
+            }};
+            Info material5 = new Info(){{
+                header = "Видео";
+                body = "Список знакомых";
+            }};
+
+            ArrayList<Info> list = new ArrayList<Info>();
+
+            list.add(material);
+            list.add(material1);
+            list.add(material2);
+            list.add(material3);
+            list.add(material4);
+            list.add(material5);
+
+
+            listView.setAdapter(new InfoAdapter(context, list));
+
+            listView.setSelector(R.drawable.choise_item);
+
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Info material = (Info) parent.getItemAtPosition(position);
+
+                    String path = "";
+                    String filePath = material.id + ".docx";
+                    String fileName = material.body + ".docx";
+
+                    try {
+
+                        InputStream file = context.getAssets().open(filePath);
+
+                        path =  context.getExternalCacheDir().getAbsolutePath();
+
+                        OutputStream outputStream = new FileOutputStream(new File(path, fileName));
+
+                        int read = 0;
+                        byte[] bytes = new byte[1024];
+
+                        while ((read = file.read(bytes)) != -1) {
+                            outputStream.write(bytes, 0, read);
+                        }
+                        filePath = path + "/"+ fileName;
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    Uri uri = Uri.fromFile(new File(filePath));
+                    try {
+
+                        Intent objIntent = new Intent(Intent.ACTION_VIEW);
+                        objIntent.setDataAndType(uri,"application/vnd.openxmlformats-officedocument.wordprocessingml.document");
+                        objIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(objIntent);
+
+                    } catch (ActivityNotFoundException e) {
+                        Toast.makeText(context,
+                                getResources().getString(R.string.doc_viewer_error), Toast.LENGTH_SHORT)
+                                .show();
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    /*
+
+                    Intent intent = new Intent(context, MaterialActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("id", material.id );
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                    */
+
+                }
+            });
+
+            return rootView;
+
+        }
+    }
 }

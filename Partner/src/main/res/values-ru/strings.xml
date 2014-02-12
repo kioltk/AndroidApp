@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">RA Group</string>
+    <string name="navigation_section_account">Кабинет</string>
+    <string name="navigation_section_pricing">Прайс-лист</string>
+    <string name="navigation_section_culture">Корпоративная культура</string>
+    <string name="navigation_section_marketing">Маркетинг</string>
+    <string name="navigation_section_promotions">Промоушены</string>
+    <string name="navigation_section_calculator">Калькулятор</string>
+    <string name="navigation_section_info">Информационные материалы</string>
+    <string name="navigation_drawer_open">Откройте панель навигации</string>
+    <string name="navigation_drawer_close">Закройте панель навигации</string>
+    <string name="action_example">Example action</string>
+    <string name="action_settings">Настройки</string>
+    <string name="title_activity_user">UserActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="doc_viewer_error">Приложений для показа не найдено. Попробуйте QuickOffice ;)</string>
+    <string name="pv">ЛО</string>
+    <string name="gv">ГО</string>
+    <string name="pgv">ОЛГ</string>
+    <string name="sgv">НГО</string>
+    <string name="title_activity_product">ProductActivity</string>
+    <string name="title_activity_promotion">PromotionActivity</string>
+
+</resources>

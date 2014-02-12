@@ -2,7 +2,38 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="android:Theme.Holo.Light">
-        <!-- Customize your theme here. -->
-    </style>
+        <!-- Customize your theme here.-->
+        <item name="android:listChoiceBackgroundIndicator" >
+            @drawable/choise_item
+        </item>
+        <item name="android:listChoiceIndicatorSingle">
+            @color/purple_extra_light
+        </item>
 
+        <item name="android:colorFocusedHighlight">
+            @color/purple_extra_light
+        </item>
+
+        <item name="android:background">
+            @android:color/transparent
+        </item>
+
+        <item name="android:colorActivatedHighlight">
+            @color/purple
+        </item>
+        <item name="android:listSelector">
+            @color/purple_light
+        </item>
+        <item name="android:colorPressedHighlight">
+            @color/purple
+        </item>
+        <item name="android:windowBackground">
+            @android:color/white
+        </item>
+    </style>
+    <style name="AppTheme.ActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">
+            @android:color/white
+        </item>
+    </style>
 </resources>

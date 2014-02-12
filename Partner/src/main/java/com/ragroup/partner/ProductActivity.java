@@ -52,7 +52,8 @@ public class ProductActivity extends Activity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        switch (item.getItemId())
+        final int id = item.getItemId();
+        switch (id)
         {
             case android.R.id.home:
                 onBackPressed();
@@ -152,7 +153,7 @@ public class ProductActivity extends Activity {
             priceView.setText(String.valueOf(product.price));
             priceVipView.setText(String.valueOf(product.priceVip));
             priceClientView.setText(String.valueOf(product.priceClient));
-            backgroundView.setImageDrawable(context.getResources().getDrawable(R.drawable.allure_homme_sport));
+            backgroundView.setImageDrawable(context.getResources().getDrawable(product.drawableId));
 
 
             return rootView;

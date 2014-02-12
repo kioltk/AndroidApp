@@ -13,7 +13,7 @@
         android:id="@+id/header"
         android:textAllCaps="true"
         android:textSize="14dp"
-        android:textColor="#666"
+        android:textColor="@color/gray_dark"
         android:layout_margin="4dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
@@ -21,7 +21,7 @@
 
     <View
         android:layout_alignParentBottom="true"
-        android:background="#bbb"
+        android:background="@color/gray"
         android:layout_width="match_parent"
         android:layout_height="2dp" />
 </LinearLayout>

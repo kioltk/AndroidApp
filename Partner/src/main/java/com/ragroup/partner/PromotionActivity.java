@@ -9,8 +9,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.ragroup.Models.Promotion;
@@ -24,6 +25,7 @@ public class PromotionActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_promotion);
 
+        getActionBar().setDisplayHomeAsUpEnabled(true);
 
         final Promotion item = new Promotion(){{
             header = "«Моя мечта – АВТОМОБИЛЬ»";
@@ -49,6 +51,8 @@ public class PromotionActivity extends Activity {
                     .add(R.id.container, new PromotionFragment(this,item.content))
                     .commit();
         }
+
+        getActionBar().setTitle(getResources().getString(R.string.navigation_section_promotions));
     }
 
 
@@ -66,6 +70,12 @@ public class PromotionActivity extends Activity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        switch (id)
+        {
+            case android.R.id.home:
+                onBackPressed();
+                break;
+        }
         if (id == R.id.action_settings) {
             return true;
         }
@@ -91,27 +101,61 @@ public class PromotionActivity extends Activity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            LinearLayout rootView = (LinearLayout) inflater.inflate(R.layout.fragment_promotion, container, false);
+            ListView rootView = (ListView) inflater.inflate(R.layout.fragment_promotion, container, false);
 
-            for (Object item : content) {
-                if (item instanceof String) {
-
-                    TextView textView = new TextView(context);
-                    textView.setText((String) item);
-
-                    rootView.addView(textView);
-                } else {
-
-                    ImageView imageView = new ImageView(context);
-                    imageView.setImageDrawable(context.getResources().getDrawable((Integer) item));
-                    imageView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                    rootView.addView(imageView);
-
-                }
-            }
+            PromotionViewAdapter adapter = new PromotionViewAdapter(context,content);
+            rootView.setAdapter(adapter);
 
 
             return rootView;
+        }
+
+        private class PromotionViewAdapter extends BaseAdapter {
+
+            Context context;
+            ArrayList<Object> items;
+            public PromotionViewAdapter(Context context, ArrayList<Object> items){
+                this.context = context;
+                this.items = items;
+            }
+
+            @Override
+            public int getCount() {
+                return items.size();
+            }
+
+            @Override
+            public Object getItem(int position) {
+                return items.get(position);
+            }
+
+            @Override
+            public long getItemId(int position) {
+                return 0;
+            }
+
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                LayoutInflater inflater = (LayoutInflater) context
+                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+                View rootView = null;
+                rootView = inflater.inflate(R.layout.promotion_image, parent, false);
+
+                Object item = getItem(position);
+
+
+                if(item instanceof String){
+                    rootView = new TextView(context);
+                    ((TextView) rootView).setText((String) item);
+                }
+                else{
+                    //rootView = new ImageView(context);
+                    ImageView imageView = (ImageView) rootView.findViewById(R.id.image);
+                    imageView.setImageDrawable(getResources().getDrawable((Integer) item));
+                }
+                return rootView;
+            }
         }
     }
 

@@ -2,8 +2,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
     android:scrollbarStyle="outsideOverlay"
     android:background="#fff"
     tools:context="com.ragroup.partner.ProductActivity.ProductFragment">
@@ -14,81 +12,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
-        <LinearLayout
-            android:layout_margin="8dp"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="150dp">
-                <ImageView
-                    android:id="@+id/image"
-                    android:src="@drawable/allure_homme_sport"
-                    android:scaleType="centerInside"
-                    android:layout_width="140dp"
-                    android:layout_height="match_parent" />
-                <TextView
-                        android:text="aa"
-                        android:padding="8dp"
-                        android:id="@+id/name"
-                        android:textAllCaps="true"
-                        android:layout_margin="8dp"
-                        android:textSize="24dp"
-                        android:gravity="center"
-                        android:layout_marginLeft="12dp"
-                        android:textColor="#484848"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-            </LinearLayout>
-            <RelativeLayout
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp"
-                android:layout_alignParentBottom="true"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/price"
-                    android:text="10"
-                    android:textColor="#484848"
-                    android:textSize="24dp"
-                    android:gravity="center"
-                    android:layout_width="55dp"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:id="@+id/priceVip"
-                    android:text="100"
-                    android:layout_centerHorizontal="true"
-                    android:gravity="center"
-                    android:textColor="#fff"
-                    android:textSize="24dp"
-                    android:background="#8b005b"
-                    android:layout_width="55dp"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:id="@+id/priceClient"
-                    android:text="100"
-                    android:layout_alignParentRight="true"
-                    android:gravity="center"
-                    android:background="#8b005b"
-                    android:textColor="#fec046"
-                    android:textSize="24dp"
-                    android:layout_width="55dp"
-                    android:layout_height="wrap_content" />
-            </RelativeLayout>
-            <View
-                android:layout_marginLeft="75dp"
-                android:layout_marginRight="75dp"
-                android:background="#b0000000"
-                android:layout_marginTop="8dp"
-                android:layout_width="match_parent"
-                android:layout_height="1px"/>
-        </LinearLayout>
+        <include layout="@layout/list_product"/>
 
 
         <LinearLayout
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="12dp"
             android:orientation="vertical"

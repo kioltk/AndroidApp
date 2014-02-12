@@ -13,13 +13,15 @@
         android:id="@+id/header"
         android:textAllCaps="true"
         android:textSize="10dp"
-        android:textColor="#666"
+        android:textColor="#555"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/body"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         android:text="BODY"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
@@ -27,7 +29,7 @@
     <View
         android:layout_alignParentBottom="true"
         android:layout_marginTop="8dp"
-        android:background="#bbb"
+        android:background="@color/purple_light"
         android:layout_width="match_parent"
         android:layout_height="1px" />
 </LinearLayout>

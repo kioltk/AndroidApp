@@ -2,7 +2,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff"
+
     android:paddingTop="4dp"
     android:paddingBottom="4dp"
     android:paddingLeft="24dp"
@@ -14,67 +14,77 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="140dp">
+            android:layout_height="160dp">
+            <!-- todo: растровые картинки -->
             <ImageView
                 android:id="@+id/image"
                 android:src="@drawable/allure_homme_sport"
                 android:scaleType="centerInside"
-                android:layout_width="140dp"
+                android:layout_width="160dp"
                 android:layout_height="match_parent" />
-            <TextView
-                android:text="aa"
-                android:padding="8dp"
-                android:id="@+id/name"
-                android:textAllCaps="true"
-                android:layout_margin="8dp"
-                android:textSize="24dp"
-                android:gravity="center"
-                android:layout_marginLeft="12dp"
-                android:textColor="#484848"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </LinearLayout>
-        <RelativeLayout
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
-            android:layout_alignParentBottom="true"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/price"
-                android:text="10"
-                android:textColor="#484848"
-                android:textSize="24dp"
-                android:gravity="center"
-                android:layout_width="55dp"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:id="@+id/priceVip"
-                android:text="100"
-                android:layout_centerHorizontal="true"
-                android:gravity="center"
-                android:textColor="#fff"
-                android:textSize="24dp"
-                android:background="#8b005b"
-                android:layout_width="55dp"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:id="@+id/priceClient"
-                android:text="100"
-                android:layout_alignParentRight="true"
-                android:gravity="center"
-                android:background="#8b005b"
-                android:textColor="#fec046"
-                android:textSize="24dp"
-                android:layout_width="55dp"
-                android:layout_height="wrap_content" />
-        </RelativeLayout>
+                <TextView
+                    android:text="aa"
+                    android:padding="8dp"
+                    android:id="@+id/name"
+                    android:textAllCaps="true"
+                    android:layout_margin="8dp"
+                    android:textSize="24dp"
+                    android:gravity="center"
+                    android:textColor="#484848"
+                    android:layout_above="@+id/prices"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+                <RelativeLayout
+                    android:id="@+id/prices"
+                    android:layout_alignParentBottom="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/price"
+                        android:text="10"
+                        android:textColor="#484848"
+                        android:textSize="24dp"
+                        android:textStyle="italic"
+                        android:gravity="center"
+                        android:layout_width="55dp"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/priceVip"
+                        android:text="100"
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center"
+                        android:textColor="#fec046"
+                        android:textSize="24dp"
+                        android:textStyle="italic"
+                        android:background="@color/purple"
+                        android:layout_width="55dp"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/priceClient"
+                        android:text="100"
+                        android:layout_alignParentRight="true"
+                        android:gravity="center"
+                        android:textColor="#f0f0f0"
+                        android:textStyle="italic"
+                        android:background="@color/purple"
+                        android:textSize="24dp"
+                        android:layout_width="55dp"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+        </LinearLayout>
+
         <View
             android:layout_marginLeft="75dp"
             android:layout_marginRight="75dp"
-            android:background="#b0000000"
-            android:layout_marginTop="8dp"
+            android:background="@color/purple_light"
+            android:layout_marginTop="12dp"
             android:layout_width="match_parent"
             android:layout_height="1px"/>
     </LinearLayout>

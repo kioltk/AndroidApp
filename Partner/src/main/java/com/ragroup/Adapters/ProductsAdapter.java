@@ -58,9 +58,9 @@ public class ProductsAdapter extends BaseAdapter {
 
         nameView.setText(product.name.replace(" ","\n"));
         priceView.setText(String.valueOf(product.price));
-        priceView.setText(String.valueOf(product.priceVip));
-        priceView.setText(String.valueOf(product.priceClient));
-        backgroundView.setImageDrawable(context.getResources().getDrawable(R.drawable.allure_homme_sport));
+        priceVipView.setText(String.valueOf(product.priceVip));
+        priceClientView.setText(String.valueOf(product.priceClient));
+        backgroundView.setImageDrawable(context.getResources().getDrawable(product.drawableId));
 
         return rootView;
     }
